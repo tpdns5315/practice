@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>사모펀드 닷컴</title>
+        <link rel="stylesheet" href="{% static 'simu/style.css' %}" type="text/css" />
+    </head>
+    <body>
+        <h1>새 펀드</h1>
+
+        <form action="{% url 'simus:create' %}" method="POST">
+            {% csrf_token %}
+
+            <h2>수익률</h2>
+            <textarea cols=40 rows=10 name="body"></textarea>
+
+            <br>
+            <input type="submit" value="작성하기" />
+        </form>
+
+        <a href="{% url 'simus:index' %}">목록</a>
+    </body>
+</html>

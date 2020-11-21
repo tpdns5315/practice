@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>사모펀드 닷컴</title>
+        <link rel="stylesheet" href="{% static 'simu/style.css' %}" type="text/css" />
+    </head>
+    <body>
+        <h1>글 수정하기</h1>
+
+        <form action="{% url 'simus:update' simu.id %}" method="POST">
+            {% csrf_token %}
+
+            <h2>수익률</h2>
+            <textarea cols=40 rows=10 name="body">{{ simu.body }}</textarea>
+
+            <br>
+            <input type="submit" value="수정하기" />
+        </form>
+
+        <a href="{% url 'simus:index' %}">목록</a>
+
+    </body>
+</html>

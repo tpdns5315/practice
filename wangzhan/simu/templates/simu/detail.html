@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>펀드 상세 정보</h1>
+        <p>수익률 : {{ simu.body }}</p>
+        <p>설정일 : {{ simu.created_at }}</p>
+    </div>
+
+    <div>관심종목 : {{ simu.liked_users.count }}</div>
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'simus:like' simu.id %}" method="POST">
+            {% csrf_token %}
+
+            {% if user in simu.liked_users.all %}
+                <button type="submit" class="btn btn-warning">LIKE</button>
+            {% else %}
+                <button type="submit" class="btn btn-secondary">LIKE</button>
+            {% endif %}    
+        </form>
+    {% endif %}
+
+    <a href="{% url 'simus:index' %}">목록</a>
+
+    {% if user == simu.user %}
+        <a href="{% url 'simus:edit' simu.id %}">수정하기</a>
+        <a href="{% url 'simus:delete' simu.id %}">삭제하기</a>
+    {% endif %}
+    </div>
+
+{% endblock %}
+

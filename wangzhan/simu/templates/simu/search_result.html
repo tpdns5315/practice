@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'simu/style.css' %}" type="text/css" />
+{% endblock %}
+
+
+
+{% block content %}
+<h1>검색결과</h1>
+{% if result.all %}
+    {% for result in result.all %}
+        <p>펀드명 : {{ result.author }}</p>
+        <p>수익률 : {{ result.body }}</p>  
+        <p>설정일 : {{ result.created_at }}</p> 
+    {% endfor %}
+{% else %}
+<p>검색한 단어가 포함된 펀드가 없습니다.</p>
+{% endif %}
+{% endblock %}
