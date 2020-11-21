@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'simu/style.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <h1>사모펀드닷컴</h1>
+    {% if simus %}
+    <!-- 如果有simu，就把它放进 simus里 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>펀드이름</th>
+                    <th>수익률</th>
+                    <th>게시일</th>
+                    <th>상세</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for simu in simus %}
+                    <tr>
+                        <th>{{ simu.id }}</th>
+                        <td>{{ simu.user.get_username }}</td>
+                        <td>{{ simu.body }}</td>
+                        <td>{{ simu.created_at }}</td>
+                        <td><a href="{% url 'simus:detail' simu.id %}">보기</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <a href="{% url 'simus:new' %}">글쓰기</a>
+
+    
+{% endblock %}
